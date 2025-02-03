@@ -1,25 +1,23 @@
-function countingValleys(steps: number, path: string): number {
-    let seaLevel = 0;
-    let valleys = 0;
-    let altitude = 0;
+function countNumOfValley(steps : number, path : string){
+    let countValley = 0;
+    let temp : string = "";
+    for(let i = 0; i < steps; i++){
 
-    for (let step of path) {
-        if (step === 'U') {
-            altitude++;
-        } else {
-            altitude--;
+        if(path[i] == "D"){
+            temp += "D";
+        }else{
+            temp = "";
         }
 
-        if (altitude === 0 && step === 'U') {
-            valleys++;
+        if(temp == "DD"){
+            countValley++;
+            temp = "";
         }
+
     }
-
-    return valleys;
+    return countValley;
 }
 
-// Contoh penggunaan
-const steps = 8;
-const path = "UDDDUDUU";
-console.log(countingValleys(steps, path)); // Output: 1
+let numOfValley = countNumOfValley(8,"UDDDUDUU");
 
+console.log(numOfValley);

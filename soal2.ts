@@ -1,23 +1,17 @@
-function gradingStudents(grades: number[]): number[] {
-    const roundedGrades: number[] = [];
-  
-    for (const grade of grades) {
-      if (grade < 38) {
-        roundedGrades.push(grade);
-      } else {
-        const nextMultipleOf5 = Math.ceil(grade / 5) * 5;
-        if (nextMultipleOf5 - grade < 3) {
-          roundedGrades.push(nextMultipleOf5);
-        } else {
-          roundedGrades.push(grade);
+function roundGrades(...grades:number[]){
+    let roundedGrades = grades;
+
+    for(let i = 0; i < grades.length; i++){
+        let nearestFiveFactor = Math.trunc((grades[i] + 5) / 5) * 5;
+        if(nearestFiveFactor - grades[i] < 3 && grades[i] > 38){
+            roundedGrades[i] = nearestFiveFactor;
+        }else{
+            roundedGrades[i] = grades[i]; 
         }
-      }
     }
-    return roundedGrades;
-  }
-  
-  // Example Usage (based on the Sample Input provided)
-  const numStudents = 4;
-  const studentGrades = [73, 67, 38, 33];
-  const result = gradingStudents(studentGrades);
-  console.log(result); // Output: [ 75, 67, 40, 33 ]
+
+
+   return roundedGrades;
+}
+
+console.log(roundGrades(73,67,38,33));
